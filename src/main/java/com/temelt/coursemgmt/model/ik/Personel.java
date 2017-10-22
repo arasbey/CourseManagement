@@ -5,14 +5,24 @@
  */
 package com.temelt.coursemgmt.model.ik;
 
+import com.temelt.coursemgmt.model.BaseEntity;
 import java.math.BigDecimal;
 import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 /**
  *
  * @author vektorel
  */
-public class Personel {
+@Entity
+@Table(name = "employee")
+public class Personel  extends BaseEntity{
 
     private Long id;
     private String ad;
@@ -23,6 +33,9 @@ public class Personel {
     private BigDecimal ucret;
     private Date baslamaTarihi;
 
+    @Id
+    @SequenceGenerator(name = "seq_employee", allocationSize = 1, sequenceName = "seq_employee")
+    @GeneratedValue(generator = "seq_employee", strategy = GenerationType.SEQUENCE)
     public Long getId() {
         return id;
     }
@@ -31,6 +44,7 @@ public class Personel {
         this.id = id;
     }
 
+    @Column(name = "name", length = 50)
     public String getAd() {
         return ad;
     }
@@ -39,6 +53,7 @@ public class Personel {
         this.ad = ad;
     }
 
+    @Column(name = "surname", length = 50)
     public String getSoyad() {
         return soyad;
     }
@@ -47,6 +62,7 @@ public class Personel {
         this.soyad = soyad;
     }
 
+    @Column(name = "address", length = 500)
     public String getAdres() {
         return adres;
     }
@@ -55,6 +71,7 @@ public class Personel {
         this.adres = adres;
     }
 
+    @Column(name = "phone", length = 13)
     public String getTel() {
         return tel;
     }
@@ -63,6 +80,7 @@ public class Personel {
         this.tel = tel;
     }
 
+    @Column(name = "email", length = 100)
     public String getMail() {
         return mail;
     }
@@ -71,6 +89,7 @@ public class Personel {
         this.mail = mail;
     }
 
+    @Column(name = "exspense", precision = 14, scale = 2)
     public BigDecimal getUcret() {
         return ucret;
     }
@@ -79,6 +98,7 @@ public class Personel {
         this.ucret = ucret;
     }
 
+    @Column(name = "start_date")
     public Date getBaslamaTarihi() {
         return baslamaTarihi;
     }
@@ -86,6 +106,11 @@ public class Personel {
     public void setBaslamaTarihi(Date baslamaTarihi) {
         this.baslamaTarihi = baslamaTarihi;
     }
+
+   @Override
+    public String toString() {
+        return  "adi = "+ad+ " soyadı = "+soyad+ " id = "+id;
+    }
     
-    
+
 }

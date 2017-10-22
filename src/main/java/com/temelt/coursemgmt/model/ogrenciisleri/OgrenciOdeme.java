@@ -5,11 +5,17 @@
  */
 package com.temelt.coursemgmt.model.ogrenciisleri;
 
+import com.temelt.coursemgmt.model.BaseEntity;
 import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
@@ -17,14 +23,18 @@ import javax.persistence.Table;
  * @author vektorel
  */
 @Entity
-@Table(name="StudentPayment")
-public class OgrenciOdeme {
+@Table(name = "student_payment")
+public class OgrenciOdeme extends BaseEntity{
+
     private Long id;
     private String aciklama;
     private BigDecimal odemeMiktari;
     private Ogrenci ogrenci;
     private Date odemeTarihi;
-@Id
+
+    @Id
+    @SequenceGenerator(name = "seq_student_payment", allocationSize = 1, sequenceName = "seq_student_payment")
+    @GeneratedValue(generator = "seq_student_payment", strategy = GenerationType.SEQUENCE)
     public Long getId() {
         return id;
     }
@@ -32,7 +42,8 @@ public class OgrenciOdeme {
     public void setId(Long id) {
         this.id = id;
     }
-@Column(name = "Notes",length = 300)
+
+    @Column(name = "description", length = 400)
     public String getAciklama() {
         return aciklama;
     }
@@ -40,7 +51,8 @@ public class OgrenciOdeme {
     public void setAciklama(String aciklama) {
         this.aciklama = aciklama;
     }
-@Column(name = "PaymentTotal",length = 30)
+
+    @Column(name = "quantity", scale = 2, precision = 14)
     public BigDecimal getOdemeMiktari() {
         return odemeMiktari;
     }
@@ -48,7 +60,9 @@ public class OgrenciOdeme {
     public void setOdemeMiktari(BigDecimal odemeMiktari) {
         this.odemeMiktari = odemeMiktari;
     }
-@Column(name = "Student",length = 30)
+
+    @ManyToOne
+    @JoinColumn(name = "student_id")
     public Ogrenci getOgrenci() {
         return ogrenci;
     }
@@ -56,7 +70,8 @@ public class OgrenciOdeme {
     public void setOgrenci(Ogrenci ogrenci) {
         this.ogrenci = ogrenci;
     }
-@Column(name = "DateofPayment",length = 30)
+
+    @Column(name = "quantity_date")
     public Date getOdemeTarihi() {
         return odemeTarihi;
     }
@@ -64,6 +79,12 @@ public class OgrenciOdeme {
     public void setOdemeTarihi(Date odemeTarihi) {
         this.odemeTarihi = odemeTarihi;
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(id);
+    }
+ 
     
-    
+
 }

@@ -6,42 +6,48 @@
 package com.temelt.coursemgmt.service.kullanici;
 
 import com.temelt.coursemgmt.model.kullanici.Kullanici;
-import com.temelt.coursemgmt.util.CourseHibernateUtil;
+import com.temelt.coursemgmt.util.IService;
 import java.util.List;
 import org.hibernate.Criteria;
-import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 /**
  *
  * @author vektorel
  */
-public class KullaniciService {
-    Session session = CourseHibernateUtil.getSessionFactory().openSession();
-    
-    public Kullanici save(Kullanici kullanici) {
-        session.save(kullanici);
-        return kullanici;
+public class KullaniciService implements IService<Kullanici>{
+
+    @Override
+    public Kullanici save(Kullanici entity) {
+        return (Kullanici) baseService.save(entity);
     }
-    
-    public Kullanici update(Kullanici kullanici) {
-        session.update(kullanici);
-        return kullanici;
+
+    @Override
+    public Kullanici update(Kullanici entity) {
+        return (Kullanici) baseService.update(entity);
     }
-    
-    public Boolean delete(Kullanici kullanici) {
-        session.delete(kullanici);
-        return true;
+
+    @Override
+    public Boolean delete(Kullanici entity) {
+        return  baseService.delete(entity);
     }
-    
+
+    @Override
     public List<Kullanici> getAll() {
-        Criteria criteria =session.createCriteria(Kullanici.class);
-        return criteria.list();
+        return baseService.getAll(Kullanici.class);
     }
-    
+
     public Kullanici getById(Long id) {
-        Criteria criteria =session.createCriteria(Kullanici.class);
+        Criteria criteria = baseService.getSession().createCriteria(Kullanici.class);
         criteria.add(Restrictions.eq("id", id));
         return (Kullanici) criteria.uniqueResult();
     }
+
+    public Kullanici getByUsernameAndPassword(String kullaniciAdi, String sifre) {
+        Criteria criteria = baseService.getSession().createCriteria(Kullanici.class);
+        criteria.add(Restrictions.eq("kullaniciAdi", kullaniciAdi));
+        criteria.add(Restrictions.eq("sifre", sifre));
+        return (Kullanici) criteria.uniqueResult();
+    }
+    
 }

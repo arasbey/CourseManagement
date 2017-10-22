@@ -5,16 +5,28 @@
  */
 package com.temelt.coursemgmt.model.muhasebe;
 
+import com.temelt.coursemgmt.model.BaseEntity;
 import com.temelt.coursemgmt.model.demirbas.Envanter;
 import com.temelt.coursemgmt.model.ogrenciisleri.OgrenciOdeme;
 import java.math.BigDecimal;
 import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 /**
  *
  * @author vektorel
  */
-public class Gelir {
+@Entity
+@Table(name = "income")
+public class Gelir extends BaseEntity{
 
     private Long id;
     private String konu;
@@ -22,8 +34,10 @@ public class Gelir {
     private Date tarih;
     private OgrenciOdeme ogrenciOdeme;
     private Envanter envanter;
-    
 
+    @Id
+    @SequenceGenerator(name = "seq_income", allocationSize = 1, sequenceName = "seq_income")
+    @GeneratedValue(generator = "seq_income", strategy = GenerationType.SEQUENCE)
     public Long getId() {
         return id;
     }
@@ -32,6 +46,7 @@ public class Gelir {
         this.id = id;
     }
 
+    @Column(name = "subject",length = 100)
     public String getKonu() {
         return konu;
     }
@@ -40,6 +55,7 @@ public class Gelir {
         this.konu = konu;
     }
 
+    @Column(name = "quantity",precision = 14,scale = 2)
     public BigDecimal getMiktar() {
         return miktar;
     }
@@ -48,6 +64,7 @@ public class Gelir {
         this.miktar = miktar;
     }
 
+    @Column(name = "date")
     public Date getTarih() {
         return tarih;
     }
@@ -56,6 +73,8 @@ public class Gelir {
         this.tarih = tarih;
     }
 
+        @ManyToOne
+    @JoinColumn(name = "student_payment_id")
     public OgrenciOdeme getOgrenciOdeme() {
         return ogrenciOdeme;
     }
@@ -64,6 +83,8 @@ public class Gelir {
         this.ogrenciOdeme = ogrenciOdeme;
     }
 
+        @ManyToOne
+    @JoinColumn(name = "inventory_id")
     public Envanter getEnvanter() {
         return envanter;
     }
@@ -72,5 +93,7 @@ public class Gelir {
         this.envanter = envanter;
     }
     
+
     
+       
 }

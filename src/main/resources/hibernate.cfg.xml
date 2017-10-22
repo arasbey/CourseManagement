@@ -1,16 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-  <session-factory>
-    <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
-    <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-    <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/dersane</property>
-    <property name="hibernate.connection.username">postgres</property>
-    <property name="hibernate.connection.password">postgres</property>
-    <property name="hibernate.hbm2ddl.auto">update</property>
-    <property name="hibernate.show_sql">true</property>
+    <session-factory>
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/dershane</property>
+        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.connection.password">postgres</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.show_sql">true</property>
     
-    <mapping class="com.temelt.coursemgmt.model.kullanici.Kullanici"/>
-    <mapping class="com.temelt.coursemgmt.model.kullanici.Rol"/>
-  </session-factory>
+        <mapping class="com.temelt.coursemgmt.model.kullanici.Kullanici"/>
+        <mapping class="com.temelt.coursemgmt.model.kullanici.Rol"/>
+        <mapping class="com.temelt.coursemgmt.model.demirbas.Demirbas"/>
+        <mapping class="com.temelt.coursemgmt.model.demirbas.Envanter"/>
+        <mapping class="com.temelt.coursemgmt.model.ik.Ogretmen"/>
+        <mapping class="com.temelt.coursemgmt.model.ik.Personel"/>
+        <mapping class="com.temelt.coursemgmt.model.muhasebe.Gelir"/>
+        <mapping class="com.temelt.coursemgmt.model.muhasebe.Gider"/>
+        <mapping class="com.temelt.coursemgmt.model.ogrenciisleri.Ogrenci"/>
+        <mapping class="com.temelt.coursemgmt.model.ogrenciisleri.OgrenciGrup"/>
+        <mapping class="com.temelt.coursemgmt.model.ogrenciisleri.OgrenciOdeme"/>
+        <mapping class="com.temelt.coursemgmt.model.ogretmen.OgrenciDevam"/>
+        <mapping class="com.temelt.coursemgmt.model.ogretmen.Yoklama"/>
+        <mapping class="com.temelt.coursemgmt.model.yonetim.Grup"/>
+        <mapping class="com.temelt.coursemgmt.model.yonetim.GrupGun"/>
+        <mapping class="com.temelt.coursemgmt.model.yonetim.Kurs"/>
+        <mapping class="com.temelt.coursemgmt.model.yonetim.Salon"/>
+        <mapping class="com.temelt.coursemgmt.model.yonetim.Gun"/>
+    </session-factory>
 </hibernate-configuration>

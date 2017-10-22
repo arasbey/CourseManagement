@@ -6,31 +6,34 @@
 package com.temelt.coursemgmt.service.kullanici;
 
 import com.temelt.coursemgmt.model.kullanici.Rol;
+import com.temelt.coursemgmt.util.IService;
 import java.util.List;
 
 /**
  *
  * @author vektorel
  */
-public class RolService {
+public class RolService implements IService<Rol>{
 
-    public Rol save(Rol rol) {
-        return null;
+    @Override
+    public Rol save(Rol entity) {
+        return (Rol) baseService.save(entity);
     }
 
-    public Rol update(Rol rol) {
-        return null;
+    @Override
+    public Rol update(Rol entity) {
+        return (Rol) baseService.update(entity);
     }
 
-    public Boolean delete(Rol rol) {
-        return null;
+    @Override
+    public Boolean delete(Rol entity) {
+        return baseService.delete(entity);
     }
 
+    @Override
     public List<Rol> getAll() {
-        return null;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public Rol getById(Long id) {
-        return null;
-    }
+
 }

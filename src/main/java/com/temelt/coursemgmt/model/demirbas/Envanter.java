@@ -7,12 +7,24 @@ package com.temelt.coursemgmt.model.demirbas;
 
 import com.temelt.coursemgmt.model.muhasebe.Gider;
 import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 /**
  *
  * @author vektorel
  */
+@Entity
+@Table(name = "inventory")
 public class Envanter {
+
     private Long id;
     private String tanim;
     private String aciklama;
@@ -21,6 +33,9 @@ public class Envanter {
     private Date garantiBitisTarihi;
     private Gider gider;
 
+    @Id
+    @SequenceGenerator(name = "seq_inventory", allocationSize = 1, sequenceName = "seq_inventory")
+    @GeneratedValue(generator = "seq_inventory", strategy = GenerationType.SEQUENCE)
     public Long getId() {
         return id;
     }
@@ -29,6 +44,7 @@ public class Envanter {
         this.id = id;
     }
 
+    @Column(name = "caption", length = 100)
     public String getTanim() {
         return tanim;
     }
@@ -37,6 +53,7 @@ public class Envanter {
         this.tanim = tanim;
     }
 
+    @Column(name = "description", length = 400)
     public String getAciklama() {
         return aciklama;
     }
@@ -45,6 +62,7 @@ public class Envanter {
         this.aciklama = aciklama;
     }
 
+    @Column(name = "warranty")
     public Boolean getGaranti() {
         return garanti;
     }
@@ -53,6 +71,7 @@ public class Envanter {
         this.garanti = garanti;
     }
 
+    @Column(name = "warranty_start_date")
     public Date getGarantiBaslamaTarihi() {
         return garantiBaslamaTarihi;
     }
@@ -61,6 +80,7 @@ public class Envanter {
         this.garantiBaslamaTarihi = garantiBaslamaTarihi;
     }
 
+    @Column(name = "warranty_end_date")
     public Date getGarantiBitisTarihi() {
         return garantiBitisTarihi;
     }
@@ -69,6 +89,8 @@ public class Envanter {
         this.garantiBitisTarihi = garantiBitisTarihi;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "exspense_id")
     public Gider getGider() {
         return gider;
     }
@@ -76,5 +98,11 @@ public class Envanter {
     public void setGider(Gider gider) {
         this.gider = gider;
     }
+
+    @Override
+    public String toString() {
+        return  "tanimi = "+tanim+ " id = "+id;
+    }
     
+
 }

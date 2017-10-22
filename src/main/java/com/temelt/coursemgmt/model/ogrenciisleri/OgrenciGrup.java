@@ -5,12 +5,18 @@
  */
 package com.temelt.coursemgmt.model.ogrenciisleri;
 
+import com.temelt.coursemgmt.model.BaseEntity;
 import com.temelt.coursemgmt.model.yonetim.Grup;
 import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
@@ -18,14 +24,18 @@ import javax.persistence.Table;
  * @author vektorel
  */
 @Entity
-@Table(name="OgrenciGrup")
-public class OgrenciGrup {
+@Table(name = "student_group")
+public class OgrenciGrup extends BaseEntity{
+
     private Long id;
     private Ogrenci ogrenci;
     private Grup grup;
     private BigDecimal ucret;
     private Date kayitTarihi;
-@Id
+
+    @Id
+    @SequenceGenerator(name = "seq_student_group", allocationSize = 1, sequenceName = "seq_student_group")
+    @GeneratedValue(generator = "seq_student_group", strategy = GenerationType.SEQUENCE)
     public Long getId() {
         return id;
     }
@@ -33,7 +43,9 @@ public class OgrenciGrup {
     public void setId(Long id) {
         this.id = id;
     }
-@Column(name = "Student",length = 30)
+
+    @ManyToOne
+    @JoinColumn(name = "student_id")
     public Ogrenci getOgrenci() {
         return ogrenci;
     }
@@ -41,7 +53,9 @@ public class OgrenciGrup {
     public void setOgrenci(Ogrenci ogrenci) {
         this.ogrenci = ogrenci;
     }
-@Column(name = "StudentGroup")
+
+    @ManyToOne
+    @JoinColumn(name = "group_id")
     public Grup getGrup() {
         return grup;
     }
@@ -49,7 +63,8 @@ public class OgrenciGrup {
     public void setGrup(Grup grup) {
         this.grup = grup;
     }
-@Column(name = "StudentPayment")
+
+    @Column(name = "name", scale = 2, precision = 14)
     public BigDecimal getUcret() {
         return ucret;
     }
@@ -57,7 +72,8 @@ public class OgrenciGrup {
     public void setUcret(BigDecimal ucret) {
         this.ucret = ucret;
     }
-@Column(name = "StudentMembershipDate",length = 30)
+
+    @Column(name = "reg_date")
     public Date getKayitTarihi() {
         return kayitTarihi;
     }
@@ -65,6 +81,5 @@ public class OgrenciGrup {
     public void setKayitTarihi(Date kayitTarihi) {
         this.kayitTarihi = kayitTarihi;
     }
-    
-    
+
 }

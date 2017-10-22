@@ -1,23 +1,30 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.temelt.coursemgmt.model.yonetim;
 
+import com.temelt.coursemgmt.model.BaseEntity;
 import java.math.BigDecimal;
 import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
 
-/**
- *
- * @author vektorel
- */
-public class Kurs {
+@Entity
+@Table(name = "course")
+public class Kurs extends BaseEntity{
+
+    Grup grup = new Grup();
     private Long id;
     private String adi;
-    private Date baslamaTarihi;
-    private BigDecimal fiyat;
+    private Date baslamaTarihi = grup.getBaslamaTarihi();
+    private BigDecimal fiyat; 
 
+    @Id
+    @SequenceGenerator(name = "seq_course", allocationSize = 1, sequenceName = "seq_course")
+    @GeneratedValue(generator = "seq_course", strategy = GenerationType.SEQUENCE)
     public Long getId() {
         return id;
     }
@@ -26,6 +33,7 @@ public class Kurs {
         this.id = id;
     }
 
+    @Column(name = "name", length = 50)
     public String getAdi() {
         return adi;
     }
@@ -34,14 +42,17 @@ public class Kurs {
         this.adi = adi;
     }
 
-    public Date getBaslamaTarihi() {
+    @Column(name = "start_date")
+    @Temporal(javax.persistence.TemporalType.DATE)
+    public Date getbaslamaTarihi() {
         return baslamaTarihi;
     }
 
-    public void setBaslamaTarihi(Date baslamaTarihi) {
+    public void setbaslamaTarihi(Date baslamaTarihi) {
         this.baslamaTarihi = baslamaTarihi;
     }
 
+    @Column(name = "price", precision = 14, scale = 2)
     public BigDecimal getFiyat() {
         return fiyat;
     }
@@ -49,7 +60,5 @@ public class Kurs {
     public void setFiyat(BigDecimal fiyat) {
         this.fiyat = fiyat;
     }
-    
-    
-    
+
 }

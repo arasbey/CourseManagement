@@ -5,17 +5,33 @@
  */
 package com.temelt.coursemgmt.model.ogretmen;
 
+import com.temelt.coursemgmt.model.BaseEntity;
 import com.temelt.coursemgmt.model.ogrenciisleri.Ogrenci;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 /**
  *
  * @author vektorel
  */
-public class OgrenciDevam {
+@Entity
+@Table(name = "student_attendance")
+public class OgrenciDevam extends BaseEntity{
+
     private Long id;
     private Yoklama yoklama;
     private Ogrenci ogrenci;
 
+    @Id
+    @SequenceGenerator(name = "seq_student_attendance", allocationSize = 1, sequenceName = "seq_student_attendance")
+    @GeneratedValue(generator = "seq_student_attendance", strategy = GenerationType.SEQUENCE)
     public Long getId() {
         return id;
     }
@@ -24,6 +40,8 @@ public class OgrenciDevam {
         this.id = id;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "attendance_id")
     public Yoklama getYoklama() {
         return yoklama;
     }
@@ -32,6 +50,8 @@ public class OgrenciDevam {
         this.yoklama = yoklama;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "student_id")
     public Ogrenci getOgrenci() {
         return ogrenci;
     }
@@ -39,6 +59,5 @@ public class OgrenciDevam {
     public void setOgrenci(Ogrenci ogrenci) {
         this.ogrenci = ogrenci;
     }
-    
-    
+
 }

@@ -5,20 +5,17 @@
  */
 package com.temelt.coursemgmt;
 
-import com.temelt.coursemgmt.model.kullanici.Kullanici;
-import com.temelt.coursemgmt.service.kullanici.KullaniciService;
-import java.util.List;
+import com.temelt.coursemgmt.gui.kullanici.frmLogin;
 
 /**
  *
  * @author vektorel
  */
 public class Runner {
+
     public static void main(String[] args) {
-        KullaniciService kullaniciService=new KullaniciService();
-        List<Kullanici> liste = kullaniciService.getAll();
-        for (Kullanici kullanici : liste) {
-            System.out.println(kullanici.toString());
-        }
+        frmLogin login = new frmLogin(null, true);
+        login.setLocationRelativeTo(null);
+        login.show();
     }
 }

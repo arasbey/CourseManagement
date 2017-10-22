@@ -5,12 +5,17 @@
  */
 package com.temelt.coursemgmt.model.kullanici;
 
+import com.temelt.coursemgmt.model.BaseEntity;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
@@ -19,7 +24,8 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "usr")
-public class Kullanici {
+public class Kullanici extends BaseEntity{
+
     private Long id;
     private String kullaniciAdi;
     private String sifre;
@@ -30,6 +36,8 @@ public class Kullanici {
     private Rol rol;
 
     @Id
+    @SequenceGenerator(name = "seq_usr", allocationSize = 1, sequenceName = "seq_usr")
+    @GeneratedValue(generator = "seq_usr", strategy = GenerationType.SEQUENCE)
     public Long getId() {
         return id;
     }
@@ -38,7 +46,7 @@ public class Kullanici {
         this.id = id;
     }
 
-    @Column(name = "usrname",length = 30)
+    @Column(name = "usrname", length = 30, unique = true)
     public String getKullaniciAdi() {
         return kullaniciAdi;
     }
@@ -47,7 +55,7 @@ public class Kullanici {
         this.kullaniciAdi = kullaniciAdi;
     }
 
-    @Column(name = "pwd",length = 30)
+    @Column(name = "pwd", length = 30)
     public String getSifre() {
         return sifre;
     }
@@ -65,7 +73,7 @@ public class Kullanici {
         this.uyelikTarihi = uyelikTarihi;
     }
 
-    @Column(name = "email",length = 100)
+    @Column(name = "email", length = 100)
     public String getEmail() {
         return email;
     }
@@ -74,7 +82,7 @@ public class Kullanici {
         this.email = email;
     }
 
-    @Column(name = "name",length = 30)
+    @Column(name = "name", length = 30)
     public String getAd() {
         return ad;
     }
@@ -83,7 +91,7 @@ public class Kullanici {
         this.ad = ad;
     }
 
-    @Column(name = "surname",length = 30)
+    @Column(name = "surname", length = 30)
     public String getSoyad() {
         return soyad;
     }
@@ -92,8 +100,8 @@ public class Kullanici {
         this.soyad = soyad;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "role_id")
+    @Column()
+    @Enumerated
     public Rol getRol() {
         return rol;
     }
@@ -106,5 +114,5 @@ public class Kullanici {
     public String toString() {
         return "Kullanici{" + "id=" + id + ", kullaniciAdi=" + kullaniciAdi + ", sifre=" + sifre + ", uyelikTarihi=" + uyelikTarihi + ", email=" + email + ", ad=" + ad + ", soyad=" + soyad + ", rol=" + rol + '}';
     }
-    
+
 }

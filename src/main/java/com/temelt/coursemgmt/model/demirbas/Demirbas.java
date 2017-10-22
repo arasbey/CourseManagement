@@ -8,12 +8,24 @@ package com.temelt.coursemgmt.model.demirbas;
 import com.temelt.coursemgmt.model.ik.Ogretmen;
 import com.temelt.coursemgmt.model.ik.Personel;
 import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 /**
  *
  * @author vektorel
  */
+@Entity
+@Table(name = "fixture")
 public class Demirbas {
+
     private Long id;
     private String aciklama;
     private Date tarih;
@@ -21,6 +33,9 @@ public class Demirbas {
     private Personel personel;
     private Ogretmen ogretmen;
 
+    @Id
+    @SequenceGenerator(name = "seq_fixture", allocationSize = 1, sequenceName = "seq_fixture")
+    @GeneratedValue(generator = "seq_fixture", strategy = GenerationType.SEQUENCE)
     public Long getId() {
         return id;
     }
@@ -29,6 +44,7 @@ public class Demirbas {
         this.id = id;
     }
 
+    @Column(name = "description", length = 400)
     public String getAciklama() {
         return aciklama;
     }
@@ -37,6 +53,7 @@ public class Demirbas {
         this.aciklama = aciklama;
     }
 
+    @Column(name = "date")
     public Date getTarih() {
         return tarih;
     }
@@ -45,6 +62,8 @@ public class Demirbas {
         this.tarih = tarih;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "inventory_id")
     public Envanter getEnvanter() {
         return envanter;
     }
@@ -53,6 +72,8 @@ public class Demirbas {
         this.envanter = envanter;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "emplooye_id")
     public Personel getPersonel() {
         return personel;
     }
@@ -61,6 +82,8 @@ public class Demirbas {
         this.personel = personel;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "teacher_id")
     public Ogretmen getOgretmen() {
         return ogretmen;
     }
@@ -68,6 +91,5 @@ public class Demirbas {
     public void setOgretmen(Ogretmen ogretmen) {
         this.ogretmen = ogretmen;
     }
-    
-    
+
 }
